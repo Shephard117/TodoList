@@ -62,6 +62,7 @@ class CategoryViewController: SwipeTableViewController{
         }
     }
     
+    
     //MARK: - Data manipulation methods
     
     func loadCategory() {
