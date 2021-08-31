@@ -31,8 +31,13 @@ class TodoListViewController: SwipeTableViewController {
         super.viewWillAppear(true)
         if let hexColor = selectedCategory?.cellColor{
             guard let navBar = navigationController?.navigationBar else {fatalError("Navigtion controller does'n exist")}
-            navBar.backgroundColor = UIColor.init(hexString: hexColor)
-            title = selectedCategory!.name
+            if let color = UIColor(hexString: hexColor){
+                navBar.backgroundColor = color
+                navBar.tintColor = ContrastColorOf(color, returnFlat: true)
+                navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(color, returnFlat: true) ]
+                title = selectedCategory!.name
+                searchBar.barTintColor = color
+            }
         }
     }
 

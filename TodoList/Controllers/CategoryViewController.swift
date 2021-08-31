@@ -21,6 +21,15 @@ class CategoryViewController: SwipeTableViewController{
         searchBar.delegate = self
         loadCategory()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigtion controller does'n exist")}
+        navBar.backgroundColor = UIColor(hexString: "D4C4FB")
+        searchBar.barTintColor = UIColor(hexString: "D4C4FB")
+        
+    }
 
     // MARK: - Table view data source
 
@@ -31,8 +40,10 @@ class CategoryViewController: SwipeTableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No categpries yet"
-        cell.backgroundColor = UIColor.init(hexString: (categories?[indexPath.row].cellColor) ?? "D4C4FB")
-        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor!, returnFlat: true)
+        guard let color = UIColor(hexString: (categories![indexPath.row].cellColor!)) else {fatalError()}
+        cell.backgroundColor = color
+        cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+        cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
         return cell
     }
     
@@ -50,7 +61,6 @@ class CategoryViewController: SwipeTableViewController{
             destinationVC.selectedCategory = categories?[indexPath.row]
         }
     }
-    
     
     //MARK: - Data manipulation methods
     
