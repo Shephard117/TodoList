@@ -80,7 +80,7 @@ class TodoListViewController: SwipeTableViewController {
     
     //MARK: - Model manipulation methods
     
-    func loadData(){ //provide default parametr
+    func loadData(){
             
         items = selectedCategory?.items.sorted(byKeyPath: "dateCreated", ascending: true)
         tableView.reloadData()
